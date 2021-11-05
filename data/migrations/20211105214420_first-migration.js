@@ -8,7 +8,7 @@ exports.up = async function (knex) {
     })
     .createTable("resources", (table) => {
       table.increments("resource_id");
-      table.string("resouce_name").notNullable().unique();
+      table.string("resource_name").notNullable().unique();
       table.string("resource_description");
     })
     .createTable("tasks", (table) => {
@@ -40,7 +40,7 @@ exports.up = async function (knex) {
         .unsigned()
         .notNullable()
         .references("resource_id")
-        .integer("resources")
+        .inTable("resources")
         .onDelete("RESTRICT")
         .onUpdate("RESTRICT");
     });
