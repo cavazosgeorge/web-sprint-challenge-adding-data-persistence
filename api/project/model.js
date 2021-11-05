@@ -29,7 +29,13 @@ async function getByProjectId(project_id) {
   return formattedProject;
 }
 
+async function newProject(project) {
+  const [project_id] = await db("projects").insert(project);
+  return getByProjectId(project_id);
+}
+
 module.exports = {
   getProjects,
   getByProjectId,
+  newProject,
 };
