@@ -3,7 +3,16 @@ const Tasks = require("./model");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {});
+router.get("/", (req, res, next) => {
+  Tasks.getTasks()
+    .then((tasks) => {
+      res.status(200).json({
+        success: true,
+        data: tasks,
+      });
+    })
+    .catch(next);
+});
 
 router.post("/", (req, res, next) => {});
 
