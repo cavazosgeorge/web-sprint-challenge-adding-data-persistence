@@ -14,6 +14,15 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {});
+router.post("/", (req, res, next) => {
+  Tasks.newTask()
+    .then((tasks) => {
+      res.status(201).json({
+        success: true,
+        data: tasks,
+      });
+    })
+    .catch(next);
+});
 
 module.exports = router;
