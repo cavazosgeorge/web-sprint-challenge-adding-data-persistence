@@ -1,5 +1,6 @@
 const db = require("../../data/dbConfig");
 
+// QUERY #1
 async function getProjects() {
   const allProjects = await db("projects");
 
@@ -15,6 +16,7 @@ async function getProjects() {
   return projects;
 }
 
+// QUERY #2
 async function getByProjectId(project_id) {
   const singleProject = await db("projects")
     .where("project_id", project_id)
@@ -29,6 +31,7 @@ async function getByProjectId(project_id) {
   return formattedProject;
 }
 
+// QUERY #3
 async function newProject(project) {
   const [project_id] = await db("projects").insert(project);
   return getByProjectId(project_id);
