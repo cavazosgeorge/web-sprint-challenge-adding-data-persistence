@@ -24,6 +24,25 @@ exports.up = async function (knex) {
         .inTable("projects")
         .onDelete("RESTRICT")
         .onUpdate("RESTRICT");
+    })
+    .createTable("project_resources", (table) => {
+      table.increments("project_resources_id");
+      table
+        .integer("project_id")
+        .unsigned()
+        .notNullable()
+        .references("project_id")
+        .inTable("projects")
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
+      table
+        .integer("resource_id")
+        .unsigned()
+        .notNullable()
+        .references("resource_id")
+        .integer("resources")
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
     });
 };
 
