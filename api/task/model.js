@@ -22,4 +22,15 @@ async function getTasks() {
   return tasks;
 }
 
-module.exports = { getTasks };
+async function taskById(task_id) {
+  const tasks = await db("tasks").where("task_id", task_id).first();
+  const formattedTask = {
+    task_id: tasks.task_id,
+    task_notes: tasks.task_notes,
+    task_description: tasks.task_description,
+    task_completed: tasks.task_completed === 0 ? false : true,
+  };
+  return formattedTask;
+}
+
+module.exports = { getTasks, taskById };
