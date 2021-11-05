@@ -15,4 +15,16 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
+router.post("/", (req, res, next) => {
+  projectsModel
+    .newProject(req.body)
+    .then((project) => {
+      res.status(201).json({
+        success: true,
+        data: project,
+      });
+    })
+    .catch(next);
+});
+
 module.exports = router;
