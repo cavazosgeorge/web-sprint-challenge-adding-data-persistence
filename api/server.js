@@ -9,12 +9,11 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
-// server.use("/api/resources", resourceRouter);
-// server.use("/api/projects", projectRouter);
-// server.use("/api/tasks", taskRouter);
+server.use("/api/resources", resourceRouter);
+server.use("/api/projects", projectRouter);
+server.use("/api/tasks", taskRouter);
 
-server.use((err, req, res, next) => {
-  // eslint-disable-line
+server.use((err, req, res, next) => { // eslint-disable-line
   res.status(500).json({
     succeess: false,
     message: err.message,
