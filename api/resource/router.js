@@ -15,6 +15,16 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {});
+router.post("/", (req, res, next) => {
+  resources
+    .createResource(req.body)
+    .then((resources) => {
+      res.status(201).json({
+        success: true,
+        data: resources,
+      });
+    })
+    .catch(next);
+});
 
 module.exports = router;
