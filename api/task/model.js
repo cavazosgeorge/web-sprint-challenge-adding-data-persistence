@@ -1,5 +1,6 @@
 const db = require("../../data/dbConfig");
 
+// QUERY #1
 async function getTasks() {
   const allTasks = await db("tasks").leftOuterJoin(
     "projects",
@@ -22,6 +23,7 @@ async function getTasks() {
   return tasks;
 }
 
+// QUERY #2
 async function taskById(task_id) {
   const tasks = await db("tasks").where("task_id", task_id).first();
   const formattedTask = {
@@ -33,4 +35,10 @@ async function taskById(task_id) {
   return formattedTask;
 }
 
-module.exports = { getTasks, taskById };
+// QUERY #3
+async function newTask(task) {
+  const [task_id] = await db("tasks").insert(task);
+  return taskById(task_id);
+}
+
+module.exports = { getTasks, taskById, newTask };
